@@ -1,0 +1,15 @@
+{
+  "name": "waterweave",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "水织 / WaterWeave —— 无压力线路式逻辑解谜（隋唐大运河洛阳段漕运）",
+  "scripts": {
+    "test": "node --test test/*.test.js",
+    "verify": "node tools/verify-levels.mjs",
+    "build": "node tools/build.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

@@ -16,7 +16,7 @@
 import { levels } from './logic/levels.js';
 import { createState } from './logic/model.js';
 import { validate, litSettlementsInOrder, loopPath } from './logic/validator.js';
-import { pointAt as pointIndexAt } from './logic/topology.js';
+import { pointAt as pointIndexAt, EMPTY } from './logic/topology.js';
 import { layoutFor, gridPoint, pathSampler, drawFrame, easeOut } from './render/scene.js';
 import { createRenderer } from './render/renderer.js';
 import { attachInput } from './ui/input.js';
@@ -32,6 +32,7 @@ const canvas = document.getElementById('board');
 const card = document.getElementById('notecard');
 const cardTitle = document.getElementById('notecard-title');
 const cardBody = document.getElementById('notecard-body');
+const hint = document.getElementById('hint');
 
 let state = createState(level.grid);
 let validation = validate(level, state);
@@ -68,6 +69,7 @@ function refresh() {
   const wasSolved = validation.solved;
   validation = validate(level, state);
   alerts = alertsOf(validation);
+  syncHint();
   if (validation.solved && !wasSolved) startReward();
   else if (!validation.solved && wasSolved) resetReward();
 }
@@ -91,8 +93,20 @@ function resetReward() {
 const tutorial = createTutorial({
   onFinish() {
     mode = 'play';
+    syncHint();
   },
 });
+
+/**
+ * 提示条只在「教学关已播完、玩家还没落笔」时出现；开了第一条渠就淡出，不再回来。
+ * 这是对设计稿「规则用动效讲，不用文字」的一处实测让步：动效没讲清，就先补一行。
+ */
+function syncHint() {
+  const painted = state.some((v) => v !== EMPTY);
+  hint.classList.toggle('gone', mode === 'tutorial' || painted);
+}
+
+syncHint();
 
 const renderer = createRenderer(canvas, (ctx, view, size) => {
   if (mode === 'tutorial') {

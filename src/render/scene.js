@@ -168,7 +168,7 @@ export function strokePolylineProgress(ctx, points, progress, { closed = true } 
 function drawLattice(ctx, layout) {
   ctx.save();
   ctx.strokeStyle = PALETTE.gridline;
-  ctx.globalAlpha = 0.55;
+  ctx.globalAlpha = 0.9;
   ctx.lineWidth = 1;
   for (let j = 0; j <= layout.rows; j++) {
     const a = gridPoint(layout, 0, j);

@@ -16,7 +16,7 @@ export const PALETTE = Object.freeze({
   lamp: '#F2C879',       // 灯火：暖黄，只允许出现在聚落
   silhouette: '#0E161E', // 建筑剪影：近乎黑的青
   text: '#EDE6D6',       // 文字 / 注记：米白
-  gridline: '#3A4750',   // 格线
+  gridline: '#5A6C7A',   // 格线（M3 提亮：原 #3A4750 与地格仅 1.1:1，几乎看不见）
   mark: '#6B7A88',       // 标记（细叉）
   alert: '#C96A5A',      // 提示：暖红，用于数字不满足
 });
